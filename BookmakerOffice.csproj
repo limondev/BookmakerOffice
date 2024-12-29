@@ -61,6 +61,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddBalanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBalanceForm.Designer.cs">
+      <DependentUpon>AddBalanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewEvent.Designer.cs">
+      <DependentUpon>AddNewEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookmakerOfficeDataSet.cs">
+      <DependentUpon>BookmakerOfficeDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="BookmakerOfficeDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +102,24 @@
     <Compile Include="Participant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StatsForm.Designer.cs">
+      <DependentUpon>StatsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserCabinet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserCabinet.Designer.cs">
+      <DependentUpon>UserCabinet.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddBalanceForm.resx">
+      <DependentUpon>AddBalanceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewEvent.resx">
+      <DependentUpon>AddNewEvent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventEndForm.resx">
       <DependentUpon>EventEndForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +138,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StatsForm.resx">
+      <DependentUpon>StatsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserCabinet.resx">
+      <DependentUpon>UserCabinet.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="BookmakerOfficeDataSet.xsc">
       <DependentUpon>BookmakerOfficeDataSet.xsd</DependentUpon>
     </None>

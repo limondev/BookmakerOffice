@@ -39,11 +39,11 @@ namespace BookmakerOffice
             // Check the value and set row colors
             if (resultValue != null)
             {
-                if (resultValue.ToString() == "Win")
+                if (resultValue.ToString() == "Виграш")
                 {
                     row.DefaultCellStyle.BackColor = Color.LightGreen;
                 }
-                else if (resultValue.ToString() == "Lose")
+                else if (resultValue.ToString() == "Поразка")
                 {
                     row.DefaultCellStyle.BackColor = Color.LightCoral;
                 }

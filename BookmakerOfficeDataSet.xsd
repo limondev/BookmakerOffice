@@ -155,7 +155,7 @@ SELECT bet_id, amount, result, date, status, user_id, event_id FROM Bet WHERE (b
               <Mapping SourceColumn="event_id" DataSetColumn="event_id" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountBetsByUserAndEvent" Modifier="Public" Name="CountBetsByUserAndEvent" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="CountBetsByUserAndEvent">
+              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="CountBetsByUserAndEvent" Modifier="Public" Name="CountBetsByUserAndEvent" QueryType="Scalar" ScalarCallRetval="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="CountBetsByUserAndEvent">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT COUNT(bet_id) FROM Bet WHERE user_id = @user_id AND event_id = @event_id</CommandText>
@@ -166,7 +166,7 @@ SELECT bet_id, amount, result, date, status, user_id, event_id FROM Bet WHERE (b
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetNextID" Modifier="Public" Name="GetNextID" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="GetNextID">
+              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="GetNextID" Modifier="Public" Name="GetNextID" QueryType="Scalar" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="GetNextID">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>SELECT ISNULL(MAX(bet_id), 0) + 1 FROM [dbo].[Bet];</CommandText>
@@ -185,7 +185,7 @@ SELECT bet_id, amount, result, date, status, user_id, event_id FROM Bet WHERE (b
                   </DbCommand>
                 </SelectCommand>
               </DbSource>
-              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="MakeNewBet" Modifier="Public" Name="MakeNewBet" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="MakeNewBet">
+              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="MakeNewBet" Modifier="Public" Name="MakeNewBet" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="MakeNewBet">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO [dbo].[Bet] ([bet_id], [amount], [result], [date], [status], [user_id], [event_id], [participant_id]) VALUES (@new_id, @amount, 'Pending', GETDATE(), 'Pending', @user_id, @event_id, @participant_id);</CommandText>
@@ -283,7 +283,22 @@ SELECT event_id, name, event_start_time, event_end_time, event_status, sport_typ
               <Mapping SourceColumn="sport_type_id" DataSetColumn="sport_type_id" />
               <Mapping SourceColumn="participant_tournament_id" DataSetColumn="participant_tournament_id" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="UpdateQuery">
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>INSERT INTO Event (name, event_start_time, event_end_time, event_status, sport_type_id)
+VALUES (@name, @startTime, @endTime, 'Заплановано', @sportTypeId)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="name" ColumnName="name" DataSourceName="BookmakerOffice.dbo.Event" DataTypeServer="nvarchar(255)" DbType="String" Direction="Input" ParameterName="@name" Precision="0" ProviderType="NVarChar" Scale="0" Size="255" SourceColumn="name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="startTime" ColumnName="event_start_time" DataSourceName="BookmakerOffice.dbo.Event" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@startTime" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="event_start_time" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="endTime" ColumnName="event_end_time" DataSourceName="BookmakerOffice.dbo.Event" DataTypeServer="datetime" DbType="DateTime" Direction="Input" ParameterName="@endTime" Precision="0" ProviderType="DateTime" Scale="0" Size="8" SourceColumn="event_end_time" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="sportTypeId" ColumnName="sport_type_id" DataSourceName="BookmakerOffice.dbo.Event" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@sportTypeId" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="sport_type_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ParticipantTableAdapter" GeneratorDataComponentClassName="ParticipantTableAdapter" Name="Participant" UserDataComponentName="ParticipantTableAdapter">
             <MainSource>
@@ -863,12 +878,12 @@ DECLARE @WinningTeamId INT, @LosingTeamId INT;
 
 SELECT 
     @WinningTeamId = CASE 
-                        WHEN @new_status = 'Team1Win' THEN participant_id
-                        WHEN @new_status = 'Team2Win' THEN participant2_id
+                        WHEN @new_status = 'Команда 1 виграла' THEN participant_id
+                        WHEN @new_status = 'Команда 2 виграла' THEN participant2_id
                      END,
     @LosingTeamId = CASE 
-                        WHEN @new_status = 'Team1Win' THEN participant2_id
-                        WHEN @new_status = 'Team2Win' THEN participant_id
+                        WHEN @new_status = 'Команда 1 виграла' THEN participant2_id
+                        WHEN @new_status = 'Команда 2 виграла' THEN participant_id
                      END
 FROM ParticipantTournament
 WHERE participant_tournament_id = (
@@ -879,8 +894,8 @@ WHERE participant_tournament_id = (
 
 UPDATE Bet
 SET result = CASE 
-                WHEN participant_id = @WinningTeamId THEN 'Win'
-                WHEN participant_id = @LosingTeamId THEN 'Lose'
+                WHEN participant_id = @WinningTeamId THEN 'Виграш'
+                WHEN participant_id = @LosingTeamId THEN 'Поразка'
              END
 WHERE event_id = @event_id;
 COMMIT TRANSACTION;</CommandText>
@@ -923,6 +938,44 @@ WHERE b.user_id = @user_id AND b.event_id = @event_id;
               <Mapping SourceColumn="participant_id" DataSetColumn="participant_id" />
               <Mapping SourceColumn="participantname" DataSetColumn="participantname" />
               <Mapping SourceColumn="eventname" DataSetColumn="eventname" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="UserBetsTableTableAdapter" GeneratorDataComponentClassName="UserBetsTableTableAdapter" Name="UserBetsTable" UserDataComponentName="UserBetsTableTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="BookmakerOfficeConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="FillBetsByUser" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="FillBetsByUser" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="FillBetsByUser">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT
+    b.bet_id,
+    b.amount AS amount,
+    b.date AS date,
+    b.result AS result,
+    e.name AS eventname,
+    p.name AS participantname
+FROM 
+    Bet b
+JOIN 
+    Event e ON b.event_id = e.event_id
+JOIN 
+    Participant p ON b.participant_id = p.participant_id
+WHERE
+    b.user_id = @user_id;
+</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="user_id" ColumnName="user_id" DataSourceName="BookmakerOffice.dbo.Bet" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@user_id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="user_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="amount" DataSetColumn="amount" />
+              <Mapping SourceColumn="date" DataSetColumn="date" />
+              <Mapping SourceColumn="eventname" DataSetColumn="eventname" />
+              <Mapping SourceColumn="participantname" DataSetColumn="participantname" />
+              <Mapping SourceColumn="bet_id" DataSetColumn="bet_id" />
+              <Mapping SourceColumn="result" DataSetColumn="result" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -1272,6 +1325,36 @@ WHERE b.user_id = @user_id AND b.event_id = @event_id;
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="UserBetsTable" msprop:Generator_RowEvHandlerName="UserBetsTableRowChangeEventHandler" msprop:Generator_RowDeletedName="UserBetsTableRowDeleted" msprop:Generator_RowDeletingName="UserBetsTableRowDeleting" msprop:Generator_RowEvArgName="UserBetsTableRowChangeEvent" msprop:Generator_TablePropName="UserBetsTable" msprop:Generator_RowChangedName="UserBetsTableRowChanged" msprop:Generator_UserTableName="UserBetsTable" msprop:Generator_RowChangingName="UserBetsTableRowChanging" msprop:Generator_RowClassName="UserBetsTableRow" msprop:Generator_TableClassName="UserBetsTableDataTable" msprop:Generator_TableVarName="tableUserBetsTable">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_UserColumnName="amount" msprop:Generator_ColumnVarNameInTable="columnamount" type="xs:decimal" />
+              <xs:element name="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_UserColumnName="date" msprop:Generator_ColumnVarNameInTable="columndate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="eventname" msprop:Generator_ColumnPropNameInTable="eventnameColumn" msprop:Generator_ColumnPropNameInRow="eventname" msprop:Generator_UserColumnName="eventname" msprop:Generator_ColumnVarNameInTable="columneventname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="participantname" msprop:Generator_ColumnPropNameInTable="participantnameColumn" msprop:Generator_ColumnPropNameInRow="participantname" msprop:Generator_UserColumnName="participantname" msprop:Generator_ColumnVarNameInTable="columnparticipantname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="bet_id" msprop:Generator_ColumnPropNameInTable="bet_idColumn" msprop:Generator_ColumnPropNameInRow="bet_id" msprop:Generator_UserColumnName="bet_id" msprop:Generator_ColumnVarNameInTable="columnbet_id" type="xs:int" />
+              <xs:element name="result" msprop:Generator_ColumnPropNameInTable="resultColumn" msprop:Generator_ColumnPropNameInRow="result" msprop:Generator_UserColumnName="result" msprop:Generator_ColumnVarNameInTable="columnresult" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -1322,6 +1405,10 @@ WHERE b.user_id = @user_id AND b.event_id = @event_id;
       <xs:selector xpath=".//mstns:UsersBetsByEvent" />
       <xs:field xpath="mstns:bet_id" />
     </xs:unique>
+    <xs:unique name="UserBetsTable_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:UserBetsTable" />
+      <xs:field xpath="mstns:bet_id" />
+    </xs:unique>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
@@ -1342,6 +1429,7 @@ WHERE b.user_id = @user_id AND b.event_id = @event_id;
       <msdata:Relationship name="fk_Event2" msdata:parent="Event" msdata:child="UsersBetsByEvent" msdata:parentkey="event_id" msdata:childkey="event_id" msprop:Generator_UserParentTable="Event" msprop:Generator_UserChildTable="UsersBetsByEvent" msprop:Generator_RelationVarName="relationfk_Event2" msprop:Generator_ChildPropName="GetUsersBetsByEventRows" msprop:Generator_UserRelationName="fk_Event2" msprop:Generator_ParentPropName="EventRow" />
       <msdata:Relationship name="fk_User1" msdata:parent="User" msdata:child="UsersBetsByEvent" msdata:parentkey="user_id" msdata:childkey="user_id" msprop:Generator_UserParentTable="User" msprop:Generator_UserChildTable="UsersBetsByEvent" msprop:Generator_RelationVarName="relationfk_User1" msprop:Generator_ChildPropName="GetUsersBetsByEventRows" msprop:Generator_UserRelationName="fk_User1" msprop:Generator_ParentPropName="UserRow" />
       <msdata:Relationship name="FK__Bet__participant__0E6E26BF" msdata:parent="Participant" msdata:child="UsersBetsByEvent" msdata:parentkey="participant_id" msdata:childkey="participant_id" msprop:Generator_UserParentTable="Participant" msprop:Generator_UserChildTable="UsersBetsByEvent" msprop:Generator_RelationVarName="relationFK__Bet__participant__0E6E26BF" msprop:Generator_ChildPropName="GetUsersBetsByEventRows" msprop:Generator_UserRelationName="FK__Bet__participant__0E6E26BF" msprop:Generator_ParentPropName="ParticipantRow" />
+      <msdata:Relationship name="FK__Winnings__bet_id__7E37BEF62" msdata:parent="UserBetsTable" msdata:child="Winnings" msdata:parentkey="bet_id" msdata:childkey="bet_id" msprop:Generator_UserParentTable="UserBetsTable" msprop:Generator_UserChildTable="Winnings" msprop:Generator_RelationVarName="relationFK__Winnings__bet_id__7E37BEF62" msprop:Generator_ChildPropName="GetWinningsRows" msprop:Generator_ParentPropName="UserBetsTableRow" msprop:Generator_UserRelationName="FK__Winnings__bet_id__7E37BEF62" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

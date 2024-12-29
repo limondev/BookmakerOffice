@@ -48,6 +48,8 @@ namespace BookmakerOffice {
         
         private UsersBetsByEventDataTable tableUsersBetsByEvent;
         
+        private UserBetsTableDataTable tableUserBetsTable;
+        
         private global::System.Data.DataRelation relationFK__ActivityL__user___7B5B524B;
         
         private global::System.Data.DataRelation relationfk_Event;
@@ -81,6 +83,8 @@ namespace BookmakerOffice {
         private global::System.Data.DataRelation relationfk_User1;
         
         private global::System.Data.DataRelation relationFK__Bet__participant__0E6E26BF;
+        
+        private global::System.Data.DataRelation relationFK__Winnings__bet_id__7E37BEF62;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -145,6 +149,9 @@ namespace BookmakerOffice {
                 }
                 if ((ds.Tables["UsersBetsByEvent"] != null)) {
                     base.Tables.Add(new UsersBetsByEventDataTable(ds.Tables["UsersBetsByEvent"]));
+                }
+                if ((ds.Tables["UserBetsTable"] != null)) {
+                    base.Tables.Add(new UserBetsTableDataTable(ds.Tables["UserBetsTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -286,6 +293,16 @@ namespace BookmakerOffice {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public UserBetsTableDataTable UserBetsTable {
+            get {
+                return this.tableUserBetsTable;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -386,6 +403,9 @@ namespace BookmakerOffice {
                 }
                 if ((ds.Tables["UsersBetsByEvent"] != null)) {
                     base.Tables.Add(new UsersBetsByEventDataTable(ds.Tables["UsersBetsByEvent"]));
+                }
+                if ((ds.Tables["UserBetsTable"] != null)) {
+                    base.Tables.Add(new UserBetsTableDataTable(ds.Tables["UserBetsTable"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -492,6 +512,12 @@ namespace BookmakerOffice {
                     this.tableUsersBetsByEvent.InitVars();
                 }
             }
+            this.tableUserBetsTable = ((UserBetsTableDataTable)(base.Tables["UserBetsTable"]));
+            if ((initTable == true)) {
+                if ((this.tableUserBetsTable != null)) {
+                    this.tableUserBetsTable.InitVars();
+                }
+            }
             this.relationFK__ActivityL__user___7B5B524B = this.Relations["FK__ActivityL__user___7B5B524B"];
             this.relationfk_Event = this.Relations["fk_Event"];
             this.relationfk_User = this.Relations["fk_User"];
@@ -509,6 +535,7 @@ namespace BookmakerOffice {
             this.relationfk_Event2 = this.Relations["fk_Event2"];
             this.relationfk_User1 = this.Relations["fk_User1"];
             this.relationFK__Bet__participant__0E6E26BF = this.Relations["FK__Bet__participant__0E6E26BF"];
+            this.relationFK__Winnings__bet_id__7E37BEF62 = this.Relations["FK__Winnings__bet_id__7E37BEF62"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -543,6 +570,8 @@ namespace BookmakerOffice {
             base.Tables.Add(this.tableEventTable);
             this.tableUsersBetsByEvent = new UsersBetsByEventDataTable();
             base.Tables.Add(this.tableUsersBetsByEvent);
+            this.tableUserBetsTable = new UserBetsTableDataTable();
+            base.Tables.Add(this.tableUserBetsTable);
             this.relationFK__ActivityL__user___7B5B524B = new global::System.Data.DataRelation("FK__ActivityL__user___7B5B524B", new global::System.Data.DataColumn[] {
                         this.tableUser.user_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableActivityLog.user_idColumn}, false);
@@ -611,6 +640,10 @@ namespace BookmakerOffice {
                         this.tableParticipant.participant_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableUsersBetsByEvent.participant_idColumn}, false);
             this.Relations.Add(this.relationFK__Bet__participant__0E6E26BF);
+            this.relationFK__Winnings__bet_id__7E37BEF62 = new global::System.Data.DataRelation("FK__Winnings__bet_id__7E37BEF62", new global::System.Data.DataColumn[] {
+                        this.tableUserBetsTable.bet_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableWinnings.bet_idColumn}, false);
+            this.Relations.Add(this.relationFK__Winnings__bet_id__7E37BEF62);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -682,6 +715,12 @@ namespace BookmakerOffice {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializeUsersBetsByEvent() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializeUserBetsTable() {
             return false;
         }
         
@@ -775,6 +814,9 @@ namespace BookmakerOffice {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void UsersBetsByEventRowChangeEventHandler(object sender, UsersBetsByEventRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void UserBetsTableRowChangeEventHandler(object sender, UserBetsTableRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -4953,6 +4995,338 @@ namespace BookmakerOffice {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class UserBetsTableDataTable : global::System.Data.TypedTableBase<UserBetsTableRow> {
+            
+            private global::System.Data.DataColumn columnamount;
+            
+            private global::System.Data.DataColumn columndate;
+            
+            private global::System.Data.DataColumn columneventname;
+            
+            private global::System.Data.DataColumn columnparticipantname;
+            
+            private global::System.Data.DataColumn columnbet_id;
+            
+            private global::System.Data.DataColumn columnresult;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableDataTable() {
+                this.TableName = "UserBetsTable";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal UserBetsTableDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected UserBetsTableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn amountColumn {
+                get {
+                    return this.columnamount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn eventnameColumn {
+                get {
+                    return this.columneventname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn participantnameColumn {
+                get {
+                    return this.columnparticipantname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn bet_idColumn {
+                get {
+                    return this.columnbet_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn resultColumn {
+                get {
+                    return this.columnresult;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRow this[int index] {
+                get {
+                    return ((UserBetsTableRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UserBetsTableRowChangeEventHandler UserBetsTableRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UserBetsTableRowChangeEventHandler UserBetsTableRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UserBetsTableRowChangeEventHandler UserBetsTableRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event UserBetsTableRowChangeEventHandler UserBetsTableRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void AddUserBetsTableRow(UserBetsTableRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRow AddUserBetsTableRow(decimal amount, System.DateTime date, string eventname, string participantname, int bet_id, string result) {
+                UserBetsTableRow rowUserBetsTableRow = ((UserBetsTableRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        amount,
+                        date,
+                        eventname,
+                        participantname,
+                        bet_id,
+                        result};
+                rowUserBetsTableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowUserBetsTableRow);
+                return rowUserBetsTableRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRow FindBybet_id(int bet_id) {
+                return ((UserBetsTableRow)(this.Rows.Find(new object[] {
+                            bet_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                UserBetsTableDataTable cln = ((UserBetsTableDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new UserBetsTableDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnamount = base.Columns["amount"];
+                this.columndate = base.Columns["date"];
+                this.columneventname = base.Columns["eventname"];
+                this.columnparticipantname = base.Columns["participantname"];
+                this.columnbet_id = base.Columns["bet_id"];
+                this.columnresult = base.Columns["result"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnamount);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.columneventname = new global::System.Data.DataColumn("eventname", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columneventname);
+                this.columnparticipantname = new global::System.Data.DataColumn("participantname", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnparticipantname);
+                this.columnbet_id = new global::System.Data.DataColumn("bet_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnbet_id);
+                this.columnresult = new global::System.Data.DataColumn("result", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnresult);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnbet_id}, true));
+                this.columnamount.AllowDBNull = false;
+                this.columneventname.MaxLength = 255;
+                this.columnparticipantname.MaxLength = 100;
+                this.columnbet_id.AllowDBNull = false;
+                this.columnbet_id.Unique = true;
+                this.columnresult.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRow NewUserBetsTableRow() {
+                return ((UserBetsTableRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new UserBetsTableRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(UserBetsTableRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.UserBetsTableRowChanged != null)) {
+                    this.UserBetsTableRowChanged(this, new UserBetsTableRowChangeEvent(((UserBetsTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.UserBetsTableRowChanging != null)) {
+                    this.UserBetsTableRowChanging(this, new UserBetsTableRowChangeEvent(((UserBetsTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.UserBetsTableRowDeleted != null)) {
+                    this.UserBetsTableRowDeleted(this, new UserBetsTableRowChangeEvent(((UserBetsTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.UserBetsTableRowDeleting != null)) {
+                    this.UserBetsTableRowDeleting(this, new UserBetsTableRowChangeEvent(((UserBetsTableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void RemoveUserBetsTableRow(UserBetsTableRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                BookmakerOfficeDataSet ds = new BookmakerOfficeDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "UserBetsTableDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ActivityLogRow : global::System.Data.DataRow {
@@ -6789,6 +7163,17 @@ namespace BookmakerOffice {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRow UserBetsTableRow {
+                get {
+                    return ((UserBetsTableRow)(this.GetParentRow(this.Table.ParentRelations["FK__Winnings__bet_id__7E37BEF62"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK__Winnings__bet_id__7E37BEF62"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool Isamount_wonNull() {
                 return this.IsNull(this.tableWinnings.amount_wonColumn);
             }
@@ -7409,6 +7794,166 @@ namespace BookmakerOffice {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class UserBetsTableRow : global::System.Data.DataRow {
+            
+            private UserBetsTableDataTable tableUserBetsTable;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal UserBetsTableRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableUserBetsTable = ((UserBetsTableDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public decimal amount {
+                get {
+                    return ((decimal)(this[this.tableUserBetsTable.amountColumn]));
+                }
+                set {
+                    this[this.tableUserBetsTable.amountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public System.DateTime date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableUserBetsTable.dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'UserBetsTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUserBetsTable.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string eventname {
+                get {
+                    try {
+                        return ((string)(this[this.tableUserBetsTable.eventnameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'eventname\' in table \'UserBetsTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUserBetsTable.eventnameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string participantname {
+                get {
+                    try {
+                        return ((string)(this[this.tableUserBetsTable.participantnameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'participantname\' in table \'UserBetsTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUserBetsTable.participantnameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int bet_id {
+                get {
+                    return ((int)(this[this.tableUserBetsTable.bet_idColumn]));
+                }
+                set {
+                    this[this.tableUserBetsTable.bet_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string result {
+                get {
+                    try {
+                        return ((string)(this[this.tableUserBetsTable.resultColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'result\' in table \'UserBetsTable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUserBetsTable.resultColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsdateNull() {
+                return this.IsNull(this.tableUserBetsTable.dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetdateNull() {
+                this[this.tableUserBetsTable.dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IseventnameNull() {
+                return this.IsNull(this.tableUserBetsTable.eventnameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SeteventnameNull() {
+                this[this.tableUserBetsTable.eventnameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsparticipantnameNull() {
+                return this.IsNull(this.tableUserBetsTable.participantnameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetparticipantnameNull() {
+                this[this.tableUserBetsTable.participantnameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsresultNull() {
+                return this.IsNull(this.tableUserBetsTable.resultColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetresultNull() {
+                this[this.tableUserBetsTable.resultColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public WinningsRow[] GetWinningsRows() {
+                if ((this.Table.ChildRelations["FK__Winnings__bet_id__7E37BEF62"] == null)) {
+                    return new WinningsRow[0];
+                }
+                else {
+                    return ((WinningsRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Winnings__bet_id__7E37BEF62"])));
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -7802,6 +8347,40 @@ namespace BookmakerOffice {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public UsersBetsByEventRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class UserBetsTableRowChangeEvent : global::System.EventArgs {
+            
+            private UserBetsTableRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRowChangeEvent(UserBetsTableRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UserBetsTableRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -9057,12 +9636,21 @@ SELECT event_id, name, event_start_time, event_end_time, event_status, sport_typ
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT event_id, name, event_start_time, event_end_time, event_status, sport_type" +
                 "_id, participant_tournament_id FROM dbo.Event";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "INSERT INTO Event (name, event_start_time, event_end_time, event_status, sport_ty" +
+                "pe_id)\r\nVALUES (@name, @startTime, @endTime, \'Заплановано\', @sportTypeId)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.NVarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@startTime", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "event_start_time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@endTime", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "event_end_time", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sportTypeId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "sport_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9358,6 +9946,53 @@ SELECT event_id, name, event_start_time, event_end_time, event_status, sport_typ
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string name, global::System.Nullable<global::System.DateTime> event_start_time, global::System.Nullable<global::System.DateTime> event_end_time, string event_status, global::System.Nullable<int> sport_type_id, global::System.Nullable<int> participant_tournament_id, int Original_event_id, string Original_name, global::System.Nullable<global::System.DateTime> Original_event_start_time, global::System.Nullable<global::System.DateTime> Original_event_end_time, string Original_event_status, global::System.Nullable<int> Original_sport_type_id, global::System.Nullable<int> Original_participant_tournament_id) {
             return this.Update(name, event_start_time, event_end_time, event_status, sport_type_id, participant_tournament_id, Original_event_id, Original_name, Original_event_start_time, Original_event_end_time, Original_event_status, Original_sport_type_id, Original_participant_tournament_id, Original_event_id);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateQuery(string name, global::System.Nullable<global::System.DateTime> startTime, global::System.Nullable<global::System.DateTime> endTime, global::System.Nullable<int> sportTypeId) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((name == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(name));
+            }
+            if ((startTime.HasValue == true)) {
+                command.Parameters[1].Value = ((System.DateTime)(startTime.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((endTime.HasValue == true)) {
+                command.Parameters[2].Value = ((System.DateTime)(endTime.Value));
+            }
+            else {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((sportTypeId.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(sportTypeId.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -12748,12 +13383,12 @@ DECLARE @WinningTeamId INT, @LosingTeamId INT;
 
 SELECT 
     @WinningTeamId = CASE 
-                        WHEN @new_status = 'Team1Win' THEN participant_id
-                        WHEN @new_status = 'Team2Win' THEN participant2_id
+                        WHEN @new_status = 'Команда 1 виграла' THEN participant_id
+                        WHEN @new_status = 'Команда 2 виграла' THEN participant2_id
                      END,
     @LosingTeamId = CASE 
-                        WHEN @new_status = 'Team1Win' THEN participant2_id
-                        WHEN @new_status = 'Team2Win' THEN participant_id
+                        WHEN @new_status = 'Команда 1 виграла' THEN participant2_id
+                        WHEN @new_status = 'Команда 2 виграла' THEN participant_id
                      END
 FROM ParticipantTournament
 WHERE participant_tournament_id = (
@@ -12764,8 +13399,8 @@ WHERE participant_tournament_id = (
 
 UPDATE Bet
 SET result = CASE 
-                WHEN participant_id = @WinningTeamId THEN 'Win'
-                WHEN participant_id = @LosingTeamId THEN 'Lose'
+                WHEN participant_id = @WinningTeamId THEN 'Виграш'
+                WHEN participant_id = @LosingTeamId THEN 'Поразка'
              END
 WHERE event_id = @event_id;
 COMMIT TRANSACTION;";
@@ -13031,6 +13666,206 @@ WHERE b.user_id = @user_id AND b.event_id = @event_id;
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             BookmakerOfficeDataSet.UsersBetsByEventDataTable dataTable = new BookmakerOfficeDataSet.UsersBetsByEventDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class UserBetsTableTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public UserBetsTableTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "UserBetsTable";
+            tableMapping.ColumnMappings.Add("amount", "amount");
+            tableMapping.ColumnMappings.Add("date", "date");
+            tableMapping.ColumnMappings.Add("eventname", "eventname");
+            tableMapping.ColumnMappings.Add("participantname", "participantname");
+            tableMapping.ColumnMappings.Add("bet_id", "bet_id");
+            tableMapping.ColumnMappings.Add("result", "result");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::BookmakerOffice.Properties.Settings.Default.BookmakerOfficeConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT
+    b.bet_id,
+    b.amount AS amount,
+    b.date AS date,
+    b.result AS result,
+    e.name AS eventname,
+    p.name AS participantname
+FROM 
+    Bet b
+JOIN 
+    Event e ON b.event_id = e.event_id
+JOIN 
+    Participant p ON b.participant_id = p.participant_id
+WHERE
+    b.user_id = @user_id;
+";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@user_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "user_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int FillBetsByUser(BookmakerOfficeDataSet.UserBetsTableDataTable dataTable, global::System.Nullable<int> user_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((user_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(user_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual BookmakerOfficeDataSet.UserBetsTableDataTable GetData(global::System.Nullable<int> user_id) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((user_id.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((int)(user_id.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            BookmakerOfficeDataSet.UserBetsTableDataTable dataTable = new BookmakerOfficeDataSet.UserBetsTableDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
