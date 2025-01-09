@@ -42,6 +42,7 @@
             this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.betidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleteBetButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.userBetsTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.userBetsTableTableAdapter = new BookmakerOffice.BookmakerOfficeDataSetTableAdapters.UserBetsTableTableAdapter();
             this.numericMinAmount = new System.Windows.Forms.NumericUpDown();
@@ -50,6 +51,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnFilterAmount = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnExportToPDF = new System.Windows.Forms.Button();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerOfficeDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerOfficeDataSet)).BeginInit();
@@ -109,14 +113,17 @@
             this.amountDataGridViewTextBoxColumn,
             this.result,
             this.dateDataGridViewTextBoxColumn,
-            this.betidDataGridViewTextBoxColumn});
+            this.betidDataGridViewTextBoxColumn,
+            this.deleteBetButton});
             this.EventsByUserTable.DataSource = this.userBetsTableBindingSource;
-            this.EventsByUserTable.Location = new System.Drawing.Point(2, 174);
+            this.EventsByUserTable.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.EventsByUserTable.Location = new System.Drawing.Point(0, 168);
             this.EventsByUserTable.Name = "EventsByUserTable";
             this.EventsByUserTable.RowHeadersWidth = 51;
             this.EventsByUserTable.RowTemplate.Height = 24;
-            this.EventsByUserTable.Size = new System.Drawing.Size(835, 316);
+            this.EventsByUserTable.Size = new System.Drawing.Size(996, 316);
             this.EventsByUserTable.TabIndex = 2;
+            this.EventsByUserTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EventsByUserTable_CellContentClick);
             // 
             // eventnameDataGridViewTextBoxColumn
             // 
@@ -167,6 +174,15 @@
             this.betidDataGridViewTextBoxColumn.Visible = false;
             this.betidDataGridViewTextBoxColumn.Width = 125;
             // 
+            // deleteBetButton
+            // 
+            this.deleteBetButton.HeaderText = "";
+            this.deleteBetButton.MinimumWidth = 6;
+            this.deleteBetButton.Name = "deleteBetButton";
+            this.deleteBetButton.Text = "Видалити";
+            this.deleteBetButton.UseColumnTextForButtonValue = true;
+            this.deleteBetButton.Width = 125;
+            // 
             // userBetsTableBindingSource
             // 
             this.userBetsTableBindingSource.DataMember = "UserBetsTable";
@@ -178,32 +194,32 @@
             // 
             // numericMinAmount
             // 
-            this.numericMinAmount.Location = new System.Drawing.Point(9, 146);
+            this.numericMinAmount.Location = new System.Drawing.Point(389, 143);
             this.numericMinAmount.Maximum = new decimal(new int[] {
             99999999,
             0,
             0,
             0});
             this.numericMinAmount.Name = "numericMinAmount";
-            this.numericMinAmount.Size = new System.Drawing.Size(120, 22);
+            this.numericMinAmount.Size = new System.Drawing.Size(91, 22);
             this.numericMinAmount.TabIndex = 3;
             // 
             // numericMaxAmount
             // 
-            this.numericMaxAmount.Location = new System.Drawing.Point(170, 146);
+            this.numericMaxAmount.Location = new System.Drawing.Point(550, 143);
             this.numericMaxAmount.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
             this.numericMaxAmount.Name = "numericMaxAmount";
-            this.numericMaxAmount.Size = new System.Drawing.Size(120, 22);
+            this.numericMaxAmount.Size = new System.Drawing.Size(91, 22);
             this.numericMaxAmount.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 124);
+            this.label2.Location = new System.Drawing.Point(374, 120);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(115, 16);
             this.label2.TabIndex = 5;
@@ -212,7 +228,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(170, 124);
+            this.label3.Location = new System.Drawing.Point(533, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 16);
             this.label3.TabIndex = 6;
@@ -220,9 +236,9 @@
             // 
             // btnFilterAmount
             // 
-            this.btnFilterAmount.Location = new System.Drawing.Point(322, 146);
+            this.btnFilterAmount.Location = new System.Drawing.Point(668, 130);
             this.btnFilterAmount.Name = "btnFilterAmount";
-            this.btnFilterAmount.Size = new System.Drawing.Size(138, 23);
+            this.btnFilterAmount.Size = new System.Drawing.Size(127, 32);
             this.btnFilterAmount.TabIndex = 7;
             this.btnFilterAmount.Text = "Застосувати";
             this.btnFilterAmount.UseVisualStyleBackColor = true;
@@ -230,19 +246,49 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(489, 145);
+            this.button1.Location = new System.Drawing.Point(833, 130);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 23);
+            this.button1.Size = new System.Drawing.Size(151, 32);
             this.button1.TabIndex = 8;
             this.button1.Text = "Прибрати фільтр";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnExportToPDF
+            // 
+            this.btnExportToPDF.Location = new System.Drawing.Point(801, 13);
+            this.btnExportToPDF.Name = "btnExportToPDF";
+            this.btnExportToPDF.Size = new System.Drawing.Size(183, 36);
+            this.btnExportToPDF.TabIndex = 9;
+            this.btnExportToPDF.Text = "Вивести звіт ставок";
+            this.btnExportToPDF.UseVisualStyleBackColor = true;
+            this.btnExportToPDF.Click += new System.EventHandler(this.btnExportToPDF_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(16, 140);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(285, 22);
+            this.textBoxSearch.TabIndex = 10;
+            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 16);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Пошук";
+            // 
             // UserCabinet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 484);
+            this.ClientSize = new System.Drawing.Size(996, 484);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxSearch);
+            this.Controls.Add(this.btnExportToPDF);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnFilterAmount);
             this.Controls.Add(this.label3);
@@ -279,17 +325,21 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource userBetsTableBindingSource;
         private BookmakerOfficeDataSetTableAdapters.UserBetsTableTableAdapter userBetsTableTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eventnameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn participantnameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn result;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn betidDataGridViewTextBoxColumn;
         private System.Windows.Forms.NumericUpDown numericMinAmount;
         private System.Windows.Forms.NumericUpDown numericMaxAmount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnFilterAmount;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eventnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn participantnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn result;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn betidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteBetButton;
+        private System.Windows.Forms.Button btnExportToPDF;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Label label4;
     }
 }

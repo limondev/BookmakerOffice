@@ -13,6 +13,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Diagnostics;
 
 namespace BookmakerOffice
 {
@@ -141,6 +146,84 @@ namespace BookmakerOffice
                     MessageBox.Show($"Помилка завантаження даних: {ex.Message}");
                 }
             }
+        }
+
+        private void buttonExportPDF_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "PDF файли (*.pdf)|*.pdf",
+                    Title = "Зберегти PDF",
+                    FileName = $"{comboBoxStats.SelectedItem.ToString()}_Статистика.pdf"
+                };
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string pdfPath = saveFileDialog.FileName;
+
+                    using (FileStream fs = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                    {
+                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                        document.Open();
+
+                        string fontPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+                        var baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                        var font = new iTextSharp.text.Font(baseFont, 12);
+
+                        Paragraph title = new Paragraph(comboBoxStats.SelectedItem.ToString(), font);
+                        title.Alignment = Element.ALIGN_CENTER;
+                        title.SpacingAfter = 20f;
+                        document.Add(title);
+
+                        PdfPTable table = new PdfPTable(dataGridViewStats.Columns.Count);
+                        table.WidthPercentage = 100;
+
+                        // Додаємо заголовки стовпців
+                        for (int i = 0; i < dataGridViewStats.Columns.Count; i++)
+                        {
+                            PdfPCell cell = new PdfPCell(new Phrase(dataGridViewStats.Columns[i].HeaderText, font));
+                            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+                            cell.Padding = 5;
+                            table.AddCell(cell);
+                        }
+
+                        // Додаємо дані
+                        for (int i = 0; i < dataGridViewStats.Rows.Count; i++)
+                        {
+                            for (int j = 0; j < dataGridViewStats.Columns.Count; j++)
+                            {
+                                var value = dataGridViewStats.Rows[i].Cells[j].Value;
+                                string cellText = value != null ? value.ToString() : "";
+
+                                PdfPCell cell = new PdfPCell(new Phrase(cellText, font));
+                                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                                cell.Padding = 5;
+                                table.AddCell(cell);
+                            }
+                        }
+
+                        document.Add(table);
+                        document.Close();
+                        writer.Close();
+                        fs.Close();
+
+                        MessageBox.Show("PDF файл успішно створено!", "Успіх",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Process.Start(new ProcessStartInfo(pdfPath) { UseShellExecute = true });
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при створенні PDF: {ex.Message}",
+                    "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
     }
 }

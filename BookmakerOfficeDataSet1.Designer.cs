@@ -13376,11 +13376,16 @@ SELECT winnings_id, amount_won, payout_date, payout_status, payment_method, bet_
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
             this._commandCollection[1].CommandText = @"BEGIN TRANSACTION;
+
+-- Оновлення статусу події
 UPDATE Event
 SET event_status = @new_status 
 WHERE event_id = @event_id;
+
+-- Змінні для визначення переможця та переможеної команди
 DECLARE @WinningTeamId INT, @LosingTeamId INT;
 
+-- Визначення команд залежно від результату
 SELECT 
     @WinningTeamId = CASE 
                         WHEN @new_status = 'Команда 1 виграла' THEN participant_id
@@ -13397,16 +13402,28 @@ WHERE participant_tournament_id = (
     WHERE event_id = @event_id
 );
 
+-- Оновлення результатів ставок
 UPDATE Bet
 SET result = CASE 
                 WHEN participant_id = @WinningTeamId THEN 'Виграш'
                 WHEN participant_id = @LosingTeamId THEN 'Поразка'
              END
 WHERE event_id = @event_id;
-COMMIT TRANSACTION;";
+
+-- Збільшення балансу користувача для виграшних ставок
+UPDATE Users
+SET balance = balance + Bet.amount * 2
+FROM Users
+INNER JOIN Bet ON Users.user_id = Bet.user_id
+WHERE Bet.event_id = @event_id
+  AND Bet.participant_id = @WinningTeamId;
+
+COMMIT TRANSACTION;
+";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_status", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "event_status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@event_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "event_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@WinningTeamId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "participant_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13437,7 +13454,7 @@ COMMIT TRANSACTION;";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(string new_status, int event_id) {
+        public virtual int UpdateQuery(string new_status, int event_id, global::System.Nullable<int> WinningTeamId) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             if ((new_status == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
@@ -13446,6 +13463,12 @@ COMMIT TRANSACTION;";
                 command.Parameters[0].Value = ((string)(new_status));
             }
             command.Parameters[1].Value = ((int)(event_id));
+            if ((WinningTeamId.HasValue == true)) {
+                command.Parameters[2].Value = ((int)(WinningTeamId.Value));
+            }
+            else {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

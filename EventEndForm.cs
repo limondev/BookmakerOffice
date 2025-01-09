@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BookmakerOffice
@@ -14,29 +9,37 @@ namespace BookmakerOffice
     {
         private int _event_id;
         private int _user_id;
-        public EventEndForm(int user_id, int event_id)
+        private string connectionString;
+
+        public EventEndForm(int user_id, int event_id, string connectionString)
         {
             _user_id = user_id;
             _event_id = event_id;
+            this.connectionString = connectionString;
             InitializeComponent();
-
         }
 
         private void EventEndForm_Load(object sender, EventArgs e)
         {
-            usersBetsByEventTableAdapter.FillUsersBetsByEventID(bookmakerOfficeDataSet.UsersBetsByEvent,_user_id, _event_id);
-           
-
+            try
+            {
+                // Завантажуємо ставки користувача на цей івент
+                usersBetsByEventTableAdapter.FillUsersBetsByEventID(bookmakerOfficeDataSet.UsersBetsByEvent, _user_id, _event_id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при завантаженні ставок: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             var row = dataGridView1.Rows[e.RowIndex];
 
-            // Retrieve the value of the "result" column (adjust name to match your DataGridView)
+            // Отримуємо значення колонки "result"
             var resultValue = row.Cells["result"].Value;
 
-            // Check the value and set row colors
+            // Встановлюємо кольори рядків відповідно до результату
             if (resultValue != null)
             {
                 if (resultValue.ToString() == "Виграш")
@@ -49,10 +52,9 @@ namespace BookmakerOffice
                 }
                 else
                 {
-                    row.DefaultCellStyle.BackColor = Color.LightYellow; // For other statuses
+                    row.DefaultCellStyle.BackColor = Color.LightYellow; // Інші статуси
                 }
             }
-
         }
     }
 }

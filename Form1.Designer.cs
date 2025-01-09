@@ -39,6 +39,8 @@
             this.Participant2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.makeBetButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.endeventbutton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.editEventButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.deleteEventButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.eventTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookmakerOfficeDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookmakerOfficeDataSet = new BookmakerOffice.BookmakerOfficeDataSet();
@@ -89,7 +91,9 @@
             this.Participant1,
             this.Participant2,
             this.makeBetButton,
-            this.endeventbutton});
+            this.endeventbutton,
+            this.editEventButton,
+            this.deleteEventButton});
             this.dataGridView1.DataSource = this.eventTableBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView1.Location = new System.Drawing.Point(0, 236);
@@ -127,6 +131,7 @@
             this.Status.HeaderText = "Статус";
             this.Status.MinimumWidth = 6;
             this.Status.Name = "Status";
+            this.Status.Visible = false;
             // 
             // SportType
             // 
@@ -166,6 +171,23 @@
             this.endeventbutton.Name = "endeventbutton";
             this.endeventbutton.Text = "Завершити подію";
             this.endeventbutton.UseColumnTextForButtonValue = true;
+            // 
+            // editEventButton
+            // 
+            this.editEventButton.HeaderText = "";
+            this.editEventButton.MinimumWidth = 6;
+            this.editEventButton.Name = "editEventButton";
+            this.editEventButton.Text = "Редагувати подію";
+            this.editEventButton.UseColumnTextForButtonValue = true;
+            this.editEventButton.Visible = false;
+            // 
+            // deleteEventButton
+            // 
+            this.deleteEventButton.HeaderText = "";
+            this.deleteEventButton.MinimumWidth = 6;
+            this.deleteEventButton.Name = "deleteEventButton";
+            this.deleteEventButton.Text = "Видалити подію";
+            this.deleteEventButton.UseColumnTextForButtonValue = true;
             // 
             // eventTableBindingSource
             // 
@@ -255,6 +277,7 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.ValueMember = "user_id";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // userBindingSource
             // 
@@ -400,7 +423,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "MainForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventTableBindingSource)).EndInit();
@@ -429,15 +452,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn учасник1DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn учасник2DataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EventName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StartTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EndTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SportType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Participant1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Participant2;
-        private System.Windows.Forms.DataGridViewButtonColumn makeBetButton;
-        private System.Windows.Forms.DataGridViewButtonColumn endeventbutton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxSports;
         private System.Windows.Forms.BindingSource sportTypeBindingSource;
@@ -458,6 +472,17 @@
         private System.Windows.Forms.Button buttonClearFilters;
         private System.Windows.Forms.Label labelBalance;
         private System.Windows.Forms.Button buttonAddBalance;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EventName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StartTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EndTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SportType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Participant1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Participant2;
+        private System.Windows.Forms.DataGridViewButtonColumn makeBetButton;
+        private System.Windows.Forms.DataGridViewButtonColumn endeventbutton;
+        private System.Windows.Forms.DataGridViewButtonColumn editEventButton;
+        private System.Windows.Forms.DataGridViewButtonColumn deleteEventButton;
     }
 }
 

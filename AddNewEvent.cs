@@ -12,11 +12,24 @@ namespace BookmakerOffice
 {
     public partial class AddNewEvent : Form
     {
+        private DataView participantView;
+
         public AddNewEvent()
         {
 
             InitializeComponent();
 
+            // Create a DataView for filtering
+            participantView = new DataView(this.bookmakerOfficeDataSet.Participant);
+
+            // Set the DataSource of participant comboboxes to the DataView
+            comboBox1.DataSource = participantView;
+            comboBox1.DisplayMember = "name";
+            comboBox1.ValueMember = "participant_id";
+
+            comboBox2.DataSource = participantView;
+            comboBox2.DisplayMember = "name";
+            comboBox2.ValueMember = "participant_id";
         }
 
         private void AddNewEvent_Load(object sender, EventArgs e)
@@ -25,6 +38,22 @@ namespace BookmakerOffice
             this.sportTypeTableAdapter.Fill(this.bookmakerOfficeDataSet.SportType);
             // TODO: This line of code loads data into the 'bookmakerOfficeDataSet.Participant' table. You can move, or remove it, as needed.
             this.participantTableAdapter.Fill(this.bookmakerOfficeDataSet.Participant);
+            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
+        }
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox3.SelectedValue != null)
+            {
+                // Get selected sport type ID
+                int sportTypeId = Convert.ToInt32(comboBox3.SelectedValue);
+
+                // Update filter
+                participantView.RowFilter = $"sport_type_id = {sportTypeId}";
+
+                // Reset participant selections
+                comboBox1.SelectedIndex = -1;
+                comboBox2.SelectedIndex = -1;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

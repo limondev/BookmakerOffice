@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.bookmakerOfficeDataSet1 = new BookmakerOffice.BookmakerOfficeDataSet();
+            this.labelBalance = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bookmakerOfficeDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,11 +87,21 @@
             this.bookmakerOfficeDataSet1.DataSetName = "BookmakerOfficeDataSet";
             this.bookmakerOfficeDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // labelBalance
+            // 
+            this.labelBalance.AutoSize = true;
+            this.labelBalance.Location = new System.Drawing.Point(566, 62);
+            this.labelBalance.Name = "labelBalance";
+            this.labelBalance.Size = new System.Drawing.Size(121, 16);
+            this.labelBalance.TabIndex = 5;
+            this.labelBalance.Text = "Ваш баланс: 0 грн";
+            // 
             // MakeBetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.labelBalance);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MakeBetButton);
@@ -112,5 +123,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private BookmakerOfficeDataSet bookmakerOfficeDataSet1;
+        private System.Windows.Forms.Label labelBalance;
     }
 }
